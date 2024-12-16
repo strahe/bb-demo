@@ -36,19 +36,19 @@ export const useAppStore = defineStore('app', () => {
     }
   }
 
-  async function playAudioEvent(e: { userId: string }) {
-    if (muted.value) {
-      addLogs('remote audio available, but local mute')
-    }else {
-      addLogs('remote audio available')
-      await trtc.muteRemoteAudio(e.userId, false)
-    }
-    await trtc.muteRemoteAudio(e.userId, true)
-  }
+  // async function playAudioEvent(e: { userId: string }) {
+  //   if (muted.value) {
+  //     addLogs('remote audio available, but local mute')
+  //   }else {
+  //     addLogs('remote audio available')
+  //     await trtc.muteRemoteAudio(e.userId, false)
+  //   }
+  //   await trtc.muteRemoteAudio(e.userId, true)
+  // }
 
   const trtc = inject<TRTC>('trtc')!
   trtc.on(TRTC.EVENT.REMOTE_AUDIO_UNAVAILABLE, (e) => {addLogs('remote audio unavailable : '+ e.userId)});
-  trtc.on(TRTC.EVENT.REMOTE_AUDIO_AVAILABLE, playAudioEvent);
+  // trtc.on(TRTC.EVENT.REMOTE_AUDIO_AVAILABLE, playAudioEvent);
   trtc.on(TRTC.EVENT.ERROR, (e)=>{addLogs(e.message)});
   trtc.on(TRTC.EVENT.AUTOPLAY_FAILED, (e)=>{addLogs('autoplay failed from : '+ e.userId)});
   trtc.on(TRTC.EVENT.KICKED_OUT, (e)=>{addLogs('kicked out by : '+ e.reason)});

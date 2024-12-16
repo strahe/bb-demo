@@ -40,7 +40,6 @@ async function handleStopLocalAudio() {
     :disabled="store.selectMicrophone === undefined"
     @mousedown="handleStartLocalAudio"
     @mouseup="handleStopLocalAudio"
-    @mouseleave="handleStopLocalAudio"
   >
     PTT
   </v-btn>
